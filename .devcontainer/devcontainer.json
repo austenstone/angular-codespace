@@ -1,5 +1,8 @@
 {
   "name": "Austen Angular",
+  "forwardPorts": [
+    4200
+  ],
   "extensions": [
     "eamodio.gitlens",
     "ms-vsliveshare.vsliveshare",
@@ -39,6 +42,7 @@
         "icon": "terminal-powershell"
       }
     },
-    "terminal.integrated.defaultProfile.linux": "zsh"
-  }
+    "terminal.integrated.defaultProfile.linux": "zsh",
+  },
+  "postCreateCommand": "npm install",
 }
