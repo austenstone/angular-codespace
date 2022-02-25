@@ -14,5 +14,3 @@ RUN apt-get install -y nodejs
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 COPY . .
-
-RUN bash ./setup.sh
