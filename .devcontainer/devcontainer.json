@@ -1,14 +1,21 @@
 {
-  "name": "Codespaces Node.js Starter",
+  "name": "Austen Angular",
   "extensions": [
-    "coenraads.bracket-pair-colorizer-2",
-    "cschleiden.vscode-github-actions",
     "eamodio.gitlens",
-    "github.vscode-pull-request-github",
-    "ms-azuretools.vscode-docker",
     "ms-vsliveshare.vsliveshare",
-    "vscode-icons-team.vscode-icons",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "github.vscode-pull-request-github",
+    "github.copilot",
+    "github.github-vscode-theme",
+    "angular.ng-template",
+    "johnpapa.angular2",
+    "editorconfig.editorconfig",
+    "eg2.vscode-npm-script",
+    "dbaeumer.vscode-eslint",
+    "cyrilletuzi.angular-schematics",
+    "alexiv.vscode-angular2-files",
+    "sibiraj-s.vscode-scss-formatter",
+    "redhat.vscode-yaml"
   ],
   "dockerFile": "Dockerfile",
   "settings": {
@@ -32,10 +39,6 @@
         "icon": "terminal-powershell"
       }
     },
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "files.exclude": {
-      "**/CODE_OF_CONDUCT.md": true,
-      "**/LICENSE": true
-    }
+    "terminal.integrated.defaultProfile.linux": "zsh"
   }
 }

@@ -11,3 +11,7 @@ sudo apt-get install -y nodejs
 
 # setup and install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Git Config Cleanup
+git config gpg.program gpg
+git config commit.gpgsign false
