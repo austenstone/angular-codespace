@@ -5,9 +5,10 @@
     {
       "name": "ng serve",
       "type": "pwa-chrome",
-      "request": "launch",
+      "request": "attach",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/",
+      "port": 4200
     },
     {
       "name": "ng test",
