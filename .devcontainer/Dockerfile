@@ -3,7 +3,9 @@ FROM ubuntu:latest
 WORKDIR /home/
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y \
+ENV TZ=America/New_York
+RUN apt update && apt install -y \
+  wget \
   curl \
   git \
   zsh
@@ -11,20 +13,17 @@ RUN apt-get update && apt-get install -y \
 # oh-my-zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Homebrew
-RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-ENV PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-RUN brew install \
-  gh \
-  || echo "Probably a warning... THIS IS FINE!"
+# GH CLI
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+RUN apt update
+RUN apt install gh
 
 # Node
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+RUN apt install -y nodejs
 
 # Chrome
-RUN curl -LO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
-RUN rm google-chrome-stable_current_amd64.deb
+RUN apt install -y chromium-browser
 
 COPY . .
