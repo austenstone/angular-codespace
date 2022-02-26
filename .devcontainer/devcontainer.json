@@ -1,7 +1,8 @@
 {
   "name": "Austen Angular",
   "forwardPorts": [
-    4200
+    4200,
+    9876
   ],
   "extensions": [
     "eamodio.gitlens",
