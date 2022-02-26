@@ -32,7 +32,9 @@
       }
     },
     "terminal.integrated.defaultProfile.linux": "zsh",
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false
   },
   "postCreateCommand": "npm i @angular/cli -g && npm i",
 }
