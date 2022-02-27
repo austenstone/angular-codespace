@@ -20,7 +20,7 @@
 		"terminal.integrated.defaultProfile.linux": "zsh",
 		"extensions.ignoreRecommendations": true,
 		"gitlens.showWelcomeOnInstall": false,
-		"gitlens.showWhatsNewAfterUpgrades": false
+		"gitlens.showWhatsNewAfterUpgrades": false,
 	},
 	"extensions": [
 		"eamodio.gitlens",

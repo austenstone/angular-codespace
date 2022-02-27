@@ -36,6 +36,5 @@ RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Setup a user
 USER ${USERNAME}
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 WORKDIR /home/${USERNAME}
 RUN mkdir source
