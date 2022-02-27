@@ -1,39 +1,46 @@
 {
-  "name": "Austen Angular",
-  "forwardPorts": [
-    4200,
-    9876
-  ],
-  "extensions": [
-    "eamodio.gitlens",
-    "ms-vsliveshare.vsliveshare",
-    "visualstudioexptteam.vscodeintellicode",
-    "github.vscode-pull-request-github",
-    "github.copilot",
-    "angular.ng-template",
-    "johnpapa.angular2",
-    "eg2.vscode-npm-script",
-    "dbaeumer.vscode-eslint",
-    "cyrilletuzi.angular-schematics",
-    "alexiv.vscode-angular2-files",
-    "sibiraj-s.vscode-scss-formatter",
-    "redhat.vscode-yaml"
-  ],
-  "dockerFile": "Dockerfile",
-  "settings": {
-    "terminal.integrated.profiles.linux": {
-      "bash": {
-        "path": "bash",
-        "icon": "terminal-bash"
-      },
-      "zsh": {
-        "path": "zsh"
-      }
-    },
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "extensions.ignoreRecommendations": true,
-    "gitlens.showWelcomeOnInstall": false,
-    "gitlens.showWhatsNewAfterUpgrades": false
-  },
-  "postCreateCommand": "npm i @angular/cli -g && npm i",
+	"name": "Austen",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "latest"
+		}
+	},
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"zsh": {
+				"path": "zsh",
+				"icon": "terminal"
+			},
+			"bash": {
+				"path": "bash",
+				"icon": "terminal-bash"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "zsh",
+		"extensions.ignoreRecommendations": true,
+		"gitlens.showWelcomeOnInstall": false,
+		"gitlens.showWhatsNewAfterUpgrades": false
+	},
+	"extensions": [
+		"eamodio.gitlens",
+		"ms-vsliveshare.vsliveshare",
+		"visualstudioexptteam.vscodeintellicode",
+		"github.vscode-pull-request-github",
+		"github.copilot",
+		"angular.ng-template",
+		"johnpapa.angular2",
+		"eg2.vscode-npm-script",
+		"dbaeumer.vscode-eslint",
+		"cyrilletuzi.angular-schematics",
+		"alexiv.vscode-angular2-files",
+		"sibiraj-s.vscode-scss-formatter",
+		"redhat.vscode-yaml"
+	],
+	"forwardPorts": [
+		4200,
+		9876
+	],
+	"postCreateCommand": "npm i @angular/cli -g && npm i",
+	"remoteUser": "astone"
 }

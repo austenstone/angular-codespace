@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+# [Choice] Ubuntu version (https://hub.docker.com/_/ubuntu)
+ARG VARIANT=latest
+FROM ubuntu:${VARIANT}
 
 WORKDIR /home/
 
@@ -8,7 +10,8 @@ RUN apt update && apt install -y \
   wget \
   curl \
   git \
-  zsh
+  zsh \
+  sudo
 
 # oh-my-zsh
 RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -23,7 +26,13 @@ RUN apt install gh
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt install -y nodejs
 
-# Chrome
+# Chromium
 RUN apt install -y chromium-browser
 
-COPY . .
+# Add a user
+ARG USERNAME=astone
+RUN useradd --create-home --shell /usr/bin/zsh --gid sudo "${USERNAME}"
+RUN cp ${USERNAME}/.oh-my-zsh/templates/zshrc.zsh-template ${USERNAME}/.zshrc
+RUN chmod 0755 ${USERNAME}/.zshrc
+
+# COPY . .
