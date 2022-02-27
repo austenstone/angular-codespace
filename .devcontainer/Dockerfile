@@ -32,7 +32,10 @@ RUN apt install -y chromium-browser
 # Add a user
 ARG USERNAME=astone
 RUN useradd --create-home --shell /usr/bin/zsh --gid sudo "${USERNAME}"
-RUN cp ${USERNAME}/.oh-my-zsh/templates/zshrc.zsh-template ${USERNAME}/.zshrc
-RUN chmod 0755 ${USERNAME}/.zshrc
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# COPY . .
+# Setup a user
+USER ${USERNAME}
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+WORKDIR /home/${USERNAME}
+RUN mkdir source
