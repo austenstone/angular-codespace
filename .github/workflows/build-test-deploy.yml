@@ -12,12 +12,12 @@ jobs:
 
       - name: Install ⬇️
         run: npm ci
-          
+
       - name: Build 🔧
         run: npm run build
-          
+
       - name: Test 🧪
-        run: npm run test
+        run: npm run test:ci
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
