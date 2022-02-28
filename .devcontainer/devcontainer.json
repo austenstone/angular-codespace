@@ -8,16 +8,12 @@
 	},
 	"settings": {
 		"terminal.integrated.profiles.linux": {
-			"zsh": {
-				"path": "zsh",
-				"icon": "terminal"
-			},
 			"bash": {
 				"path": "bash",
 				"icon": "terminal-bash"
 			}
 		},
-		"terminal.integrated.defaultProfile.linux": "zsh",
+		"terminal.integrated.defaultProfile.linux": "bash",
 		"extensions.ignoreRecommendations": true,
 		"gitlens.showWelcomeOnInstall": false,
 		"gitlens.showWhatsNewAfterUpgrades": false,
@@ -27,7 +23,6 @@
 		"ms-vsliveshare.vsliveshare",
 		"visualstudioexptteam.vscodeintellicode",
 		"github.vscode-pull-request-github",
-		"github.copilot",
 		"angular.ng-template",
 		"johnpapa.angular2",
 		"eg2.vscode-npm-script",
