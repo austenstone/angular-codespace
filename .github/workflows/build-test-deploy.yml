@@ -18,7 +18,7 @@ jobs:
         run: npm ci
 
       - name: Build 🔧
-        run: npm run build
+        run: npm run build --base-href /${{ github.event.repository.name }}/
 
       - name: Test 🧪
         run: npm run test:ci
