@@ -6,8 +6,6 @@ jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
-    env:
-      NAME: ${{ github.event.repository.name }}
     steps:
       - name: Dump GitHub context
         id: github_context_step
@@ -29,7 +27,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
-          folder: dist/$NAME
+          folder: dist/${{ github.event.repository.name }}
 
       - name: Fallback to index.html 🔁
-        run: cp $NAME/index.html $NAME/404.html
+        run: cp ${{ github.event.repository.name }}/index.html ${{ github.event.repository.name }}/404.html
