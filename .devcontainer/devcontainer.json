@@ -42,5 +42,5 @@
 		9876
 	],
 	"postCreateCommand": "sudo npm i @angular/cli -g && npm i",
-	"remoteUser": "astone"
+	// "remoteUser": "astone"
 }
