@@ -23,11 +23,12 @@ jobs:
       - name: Test 🧪
         run: npm run test:ci
 
+
+      - name: Fallback to index.html 🔁
+        run: cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
           folder: dist/${{ github.event.repository.name }}
-
-      - name: Fallback to index.html 🔁
-        run: cp ${{ github.event.repository.name }}/index.html ${{ github.event.repository.name }}/404.html
