@@ -6,6 +6,8 @@
 			"VARIANT": "latest"
 		}
 	},
+	"forwardPorts": [ 4200, 9876 ],
+	"postCreateCommand": "npm i",
 	"settings": {
 		"terminal.integrated.profiles.linux": {
 			"bash": {
@@ -31,7 +33,5 @@
 		"alexiv.vscode-angular2-files",
 		"sibiraj-s.vscode-scss-formatter",
 		"redhat.vscode-yaml"
-	],
-	"forwardPorts": [ 4200, 9876 ],
-	"postCreateCommand": "npm i"
+	]
 }
