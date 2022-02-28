@@ -23,7 +23,6 @@ jobs:
       - name: Test 🧪
         run: npm run test:ci
 
-
       - name: Fallback to index.html 🔁
         run: cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
 
