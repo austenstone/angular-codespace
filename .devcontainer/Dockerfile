@@ -35,6 +35,7 @@ RUN useradd --create-home --shell /usr/bin/zsh --gid sudo "${USERNAME}"
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Setup a user
-USER ${USERNAME}
-WORKDIR /home/${USERNAME}
+# USER ${USERNAME}
+# WORKDIR /home/${USERNAME}
+
 RUN mkdir source
