@@ -24,3 +24,6 @@ jobs:
         with:
           branch: gh-pages
           folder: dist/gh-dashboard
+
+      - name: Fallback to index.html 🔁
+        run: cp austen-stone/index.html austen-stone/404.html
