@@ -32,10 +32,6 @@
 		"sibiraj-s.vscode-scss-formatter",
 		"redhat.vscode-yaml"
 	],
-	"forwardPorts": [
-		4200,
-		9876
-	],
-	"postCreateCommand": "sudo npm i @angular/cli -g && npm i",
-	// "remoteUser": "astone"
+	"forwardPorts": [ 4200, 9876 ],
+	"postCreateCommand": "npm i"
 }
