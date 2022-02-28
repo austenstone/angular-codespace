@@ -6,18 +6,16 @@
 			"VARIANT": "latest"
 		}
 	},
+	"forwardPorts": [ 4200, 9876 ],
+	"postCreateCommand": "npm i",
 	"settings": {
 		"terminal.integrated.profiles.linux": {
-			"zsh": {
-				"path": "zsh",
-				"icon": "terminal"
-			},
 			"bash": {
 				"path": "bash",
 				"icon": "terminal-bash"
 			}
 		},
-		"terminal.integrated.defaultProfile.linux": "zsh",
+		"terminal.integrated.defaultProfile.linux": "bash",
 		"extensions.ignoreRecommendations": true,
 		"gitlens.showWelcomeOnInstall": false,
 		"gitlens.showWhatsNewAfterUpgrades": false,
@@ -27,7 +25,6 @@
 		"ms-vsliveshare.vsliveshare",
 		"visualstudioexptteam.vscodeintellicode",
 		"github.vscode-pull-request-github",
-		"github.copilot",
 		"angular.ng-template",
 		"johnpapa.angular2",
 		"eg2.vscode-npm-script",
@@ -36,11 +33,5 @@
 		"alexiv.vscode-angular2-files",
 		"sibiraj-s.vscode-scss-formatter",
 		"redhat.vscode-yaml"
-	],
-	"forwardPorts": [
-		4200,
-		9876
-	],
-	"postCreateCommand": "sudo npm i @angular/cli -g && npm i",
-	// "remoteUser": "astone"
+	]
 }
