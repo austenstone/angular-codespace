@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'gh-dashboard'`, () => {
+  it(`should have as title 'angular-codespace'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('gh-dashboard');
+    expect(app.title).toEqual('angular-codespace');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('gh-dashboard app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-codespace app is running!');
   });
 });

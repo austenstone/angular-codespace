@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gh-dashboard": {
+    "angular-codespace": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/gh-dashboard",
+            "outputPath": "dist/angular-codespace",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gh-dashboard:build:production"
+              "browserTarget": "angular-codespace:build:production"
             },
             "development": {
-              "browserTarget": "gh-dashboard:build:development"
+              "browserTarget": "angular-codespace:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gh-dashboard:build"
+            "browserTarget": "angular-codespace:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "gh-dashboard"
+  "defaultProject": "angular-codespace"
 }

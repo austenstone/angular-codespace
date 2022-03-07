@@ -18,7 +18,7 @@ jobs:
         run: npm ci
 
       - name: Build 🔧
-        run: npm run build -- --base-href /gh-dashboard/
+        run: npm run build -- --base-href /angular-codespace/
 
       - name: Test 🧪
         run: npm run test:ci
