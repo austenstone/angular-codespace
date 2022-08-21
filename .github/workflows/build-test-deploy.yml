@@ -4,10 +4,6 @@ on:
   push:
   pull_request:
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build-test-deploy-release:
     name: Build ⚒️ Test 🧪 Deploy 🚀 Release 🚢

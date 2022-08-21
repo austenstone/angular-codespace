@@ -3,6 +3,10 @@ name: Deploy
 on:
   workflow_call:
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 env:
   dist: dist/${{ github.event.repository.name }}
 
