@@ -18,6 +18,8 @@ env:
 
 jobs:
   build-and-deploy:
+    permissions:
+      contents: write
     name: Build and Deploy ⚒️🚀
     runs-on: ubuntu-latest
     environment:
@@ -41,8 +43,7 @@ jobs:
         with:
           path: ${{ env.dist }}
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ${{ runner.temp }}/artifact.tar
