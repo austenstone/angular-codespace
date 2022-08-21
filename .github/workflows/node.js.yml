@@ -1,4 +1,4 @@
-name: Build / Test / Release / Deploy
+name: NodeJS
 
 on:
   workflow_call:
