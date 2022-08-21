@@ -19,7 +19,7 @@ jobs:
     # strategy:
     #   matrix:
     #     os: [ubuntu-latest, windows-latest, macos-latest]
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/test.yml
 
   # deploy:
   #   if: github.ref == 'refs/heads/main'
