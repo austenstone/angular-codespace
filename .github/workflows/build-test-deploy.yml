@@ -32,7 +32,7 @@ jobs:
         run: npm run build -- --base-href /angular-codespace/
 
       - name: Test 🧪
-        run: npm run test:ci
+        run: npm test -- --browsers=Headless --no-watch
 
       - name: Fallback to index.html 🔁
         run: cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact ⬆️
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './dist/.'
+          path: 'dist/'
 
       - name: Deploy to GitHub Pages 🚀
         id: deployment
