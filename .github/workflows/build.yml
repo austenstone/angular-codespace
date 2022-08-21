@@ -1,6 +1,9 @@
 on:
   workflow_call:
 
+env:
+  dist: dist/${{ github.event.repository.name }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
