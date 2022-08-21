@@ -34,12 +34,12 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      - uses: actions/checkout@v2
       - run: npm ci
       - uses: actions/download-artifact@v3
         with:
           name: dist
           path: ${{ env.dist }}
-      - uses: actions/checkout@v2
       - run: npm test -- --browsers=Headless --no-watch
 
   deploy:
