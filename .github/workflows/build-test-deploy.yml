@@ -21,31 +21,11 @@ jobs:
     #     os: [ubuntu-latest, windows-latest, macos-latest]
     uses: ./.github/workflows/test.yml
 
-  # deploy:
-  #   if: github.ref == 'refs/heads/main'
-  #   needs: [build, test]
-  #   permissions:
-  #     contents: read
-  #     pages: write
-  #     id-token: write
-  #   name: Deploy 🚀
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   steps:
-  #     - uses: actions/download-artifact@v3
-  #       with:
-  #         name: dist
-  #         path: ${{ env.dist }}
-  #     - uses: actions/configure-pages@v1
-  #       if: github.ref == 'refs/heads/main'
-  #     - uses: actions/upload-pages-artifact@v1
-  #       with:
-  #         path: ${{ env.dist }}
-  #     - uses: actions/deploy-pages@v1
-  #       id: deployment
-  #       if: github.ref == 'refs/heads/main'
+  deploy:
+    name: Deploy 🚀
+    needs: [build, test]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yml
 
   # release:
   #   permissions:
