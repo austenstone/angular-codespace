@@ -23,7 +23,6 @@ jobs:
     - run: npm ci
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
     - run: npm run build -- --base-href /${{ github.event.repository.name }}/
-    - run: npm test -- --browsers=Headless --no-watch
     - run: cp ${{ env.dist }}/index.html ${{ env.dist }}/404.html
     - uses: actions/upload-artifact@v3
       with:

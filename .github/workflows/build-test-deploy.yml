@@ -14,37 +14,15 @@ env:
 jobs:
   build:
     name: Build ⚒️
-    uses: ./.github/workflows/node.js.yml
+    uses: ./.github/workflows/build.yml
 
   test:
-    needs: [build]
     name: Test 🧪
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          cache: 'npm'
-      - uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - run: npm ci
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-      - uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: ${{ env.dist }}
-      - run: npm test -- --browsers=Headless --no-watch
+    needs: [build]
+    # strategy:
+    #   matrix:
+    #     os: [ubuntu-latest, windows-latest, macos-latest]
+    uses: ./.github/workflows/build.yml
 
   deploy:
     if: github.ref == 'refs/heads/main'
