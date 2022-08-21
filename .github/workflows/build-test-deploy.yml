@@ -34,6 +34,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      - run: npm ci
       - uses: actions/download-artifact@v3
         with:
           name: dist
