@@ -12,6 +12,7 @@ env:
 
 jobs:
   deploy:
+    name: Deploy 🚀
     permissions:
       contents: read
       pages: write
