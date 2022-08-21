@@ -25,27 +25,20 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Install ⬇️
-        run: npm ci
+      - run: npm ci
 
-      - name: Build 🔧
-        run: npm run build -- --base-href /${{ github.event.repository.name }}/
+      - run: npm run build -- --base-href /${{ github.event.repository.name }}/
 
-      - name: Test 🧪
-        run: npm test -- --browsers=Headless --no-watch
+      - run: npm test -- --browsers=Headless --no-watch
 
-      - name: Fallback to index.html 🔁
-        run: cp ${{ env.dist }}/index.html ${{ env.dist }}/404.html
+      - run: cp ${{ env.dist }}/index.html ${{ env.dist }}/404.html
 
-      - name: Setup Pages 📃
+      - uses: actions/configure-pages@v1
         if: github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v1
 
-      - name: Upload artifact ⬆️
-        uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v1
         with:
           path: ${{ env.dist }}
 
@@ -56,15 +49,13 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+      - uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ${{ runner.temp }}/artifact.tar
           asset_name: artifact.tar
           asset_content_type: application/tar
 
-      - name: Deploy to GitHub Pages 🚀
+      - uses: actions/deploy-pages@v1
         id: deployment
         if: github.ref == 'refs/heads/main'
-        uses: actions/deploy-pages@v1
