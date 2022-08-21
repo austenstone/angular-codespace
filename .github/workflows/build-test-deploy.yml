@@ -1,7 +1,19 @@
-name: Build and Deploy
+name: Build and Deploy ⚒️🚀
 
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+  
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
@@ -22,8 +34,16 @@ jobs:
       - name: Fallback to index.html 🔁
         run: cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+      - name: Setup Pages 📃
+        if: github.ref == 'refs/heads/master'
+        uses: actions/configure-pages@v1
+        
+      - name: Upload artifact ⬆️
+        uses: actions/upload-pages-artifact@v1
         with:
-          branch: gh-pages
-          folder: dist/${{ github.event.repository.name }}
+          path: './dist/'
+          
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        if: github.ref == 'refs/heads/master'
+        uses: actions/deploy-pages@v1
