@@ -16,6 +16,7 @@ jobs:
     name: Build ⚒️
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/node.js.yml
       - run: npm run build -- --base-href /${{ github.event.repository.name }}/
       - run: npm test -- --browsers=Headless --no-watch
