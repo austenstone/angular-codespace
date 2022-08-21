@@ -14,6 +14,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  dist: dist/${{ github.event.repository.name }}
+
 jobs:
   build-and-deploy:
     name: Build and Deploy ⚒️🚀
@@ -29,13 +32,13 @@ jobs:
         run: npm ci
 
       - name: Build 🔧
-        run: npm run build -- --base-href /angular-codespace/
+        run: npm run build -- --base-href /${{ github.event.repository.name }}/
 
       - name: Test 🧪
         run: npm test -- --browsers=Headless --no-watch
 
       - name: Fallback to index.html 🔁
-        run: cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
+        run: cp ${{ env.dist }}/index.html ${{ env.dist }}/404.html
 
       - name: Setup Pages 📃
         if: github.ref == 'refs/heads/main'
@@ -44,7 +47,7 @@ jobs:
       - name: Upload artifact ⬆️
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'dist/'
+          path: ${{ env.dist }}
 
       - name: Deploy to GitHub Pages 🚀
         id: deployment
