@@ -16,7 +16,10 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }}
+    name: Build and Deploy ⚒️🚀
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -41,7 +44,7 @@ jobs:
       - name: Upload artifact ⬆️
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './dist/'
+          path: './dist/.'
 
       - name: Deploy to GitHub Pages 🚀
         id: deployment
