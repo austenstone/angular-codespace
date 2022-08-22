@@ -20,3 +20,4 @@ runs:
           ${{ runner.os }}-
     - run: npm ci
       if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      shell: bash
