@@ -6,6 +6,6 @@ on:
 
 jobs:
   build-test-deploy-release:
-    name: CI/CD
+    name: cicd
     uses: austenstone/.github/.github/workflows/angular.yml@main
     secrets: inherit
