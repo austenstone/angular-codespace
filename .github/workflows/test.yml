@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/npm-install
+      - uses: ./.github/actions/node-setup-install
       - uses: actions/download-artifact@v3
         with:
           name: dist
