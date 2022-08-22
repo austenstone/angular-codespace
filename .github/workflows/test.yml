@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/workflows/checkout-install.yml
+      - uses: ./.github/actions/checkout-install
       - uses: actions/download-artifact@v3
         with:
           name: dist
