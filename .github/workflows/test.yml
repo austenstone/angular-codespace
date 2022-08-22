@@ -8,7 +8,7 @@ env:
 
 jobs:
   test:
-    name: Test 🧪
+    name: Test
     runs-on: ubuntu-latest
 
     steps:

@@ -8,7 +8,7 @@ env:
 
 jobs:
   deploy:
-    name: Release 🚢
+    name: Release
     permissions:
       contents: write
     runs-on: ubuntu-latest
