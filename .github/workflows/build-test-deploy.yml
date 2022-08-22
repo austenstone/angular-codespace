@@ -7,4 +7,4 @@ on:
 jobs:
   build-test-deploy-release:
     name: CI/CD
-    uses: ./.github/reusable/node.js.yml@main
+    uses: austenstone/.github/.github/reusable/node.js.yml@main
