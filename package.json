@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /${{ github.event.repository.name }}/",
+    "build": "ng build --base-href angular-codespace",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers=Headless --no-watch"
   },
