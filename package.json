@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build -- --base-href /${{ github.event.repository.name }}/",
+    "build": "ng build --base-href /${{ github.event.repository.name }}/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test -- --browsers=Headless --no-watch"
+    "test": "ng test --browsers=Headless --no-watch"
   },
   "private": true,
   "dependencies": {
