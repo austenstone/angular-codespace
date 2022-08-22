@@ -1,4 +1,5 @@
-name: Checkout Install
+name: Setup / Install
+description: Setup Node.js and install dependencies
 
 runs:
   using: "composite"
