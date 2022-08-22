@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href angular-codespace",
+    "build:docker": "npm run build && docker build . -t angular-codespace",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers=Headless --no-watch",
     "lint": "ng lint"
