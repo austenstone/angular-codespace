@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/checkout-install
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/npm-install
       - run: npm run build -- --base-href /${{ github.event.repository.name }}/
       - run: cp ${{ env.dist }}/index.html ${{ env.dist }}/404.html
       - uses: actions/upload-artifact@v3
