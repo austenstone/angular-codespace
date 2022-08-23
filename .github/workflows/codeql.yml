@@ -3,5 +3,4 @@ on: [pull_request]
 
 jobs:
   codeql:
-    name: CodeQL
     uses: austenstone/.github/.github/workflows/codeql.yml@main
