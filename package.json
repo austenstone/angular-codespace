@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:terraform": "terraform validate && terraform apply",
     "start:docker": "docker run --name angular-codespace -d -p 8080:80 angular-codespace",
     "build": "ng build --base-href angular-codespace",
     "build:docker": "ng build && docker build . -t angular-codespace",
