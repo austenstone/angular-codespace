@@ -67,11 +67,11 @@ output "name" {
   value = azurerm_static_site.web.name
 }
 
-output "azurerm_static_site_url" {
+output "url" {
   value = azurerm_static_site.web.default_host_name
 }
 
-output "azurerm_static_site_api_key" {
+output "api_key" {
   value = azurerm_static_site.web.api_key
 }
 
