@@ -26,9 +26,9 @@ resource "azurerm_static_site" "web" {
 }
 
 output "name" {
-    value = azurerm_static_site.web.name
+  value = azurerm_static_site.web.name
 }
 
 output "url" {
-    value = azurerm_static_site.web.default_host_name
+  value = azurerm_static_site.web.default_host_name
 }
