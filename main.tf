@@ -1,5 +1,11 @@
 # Configure the Azure provider
 terraform {
+  backend "azurerm" {
+    resource_group_name  = "StorageAccount-ResourceGroup"
+    storage_account_name = "abcd1234"
+    container_name       = "tfstate"
+    key                  = "prod.terraform.tfstate"
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -14,7 +20,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "angular-codespace" {
+data "azurerm_resource_group" "angular-codespace" {
   name     = "GitHub"
   location = "eastus2"
 }
