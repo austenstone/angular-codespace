@@ -15,7 +15,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "angular-codespace" {
-  name     = "myTFResourceGroup"
+  name     = "GitHub"
   location = "eastus2"
 }
 
