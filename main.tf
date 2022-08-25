@@ -1,8 +1,8 @@
 # Configure the Azure provider
 terraform {
   backend "azurerm" {
-    resource_group_name  = "StorageAccount-ResourceGroup"
-    storage_account_name = "abcd1234"
+    resource_group_name  = "GitHub"
+    storage_account_name = "austengithubstorage_1661452699092"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
   }
