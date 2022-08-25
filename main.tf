@@ -2,7 +2,7 @@
 terraform {
   backend "azurerm" {
     resource_group_name  = "GitHub"
-    storage_account_name = "austengithubstorage_1661452699092"
+    storage_account_name = "austengithubstorage"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
   }
