@@ -20,24 +20,24 @@ provider "azurerm" {
   features {}
 }
 
-data "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "GitHub" {
   name = "GitHub"
 }
 
 // Web App
 resource "azurerm_service_plan" "example" {
   name                = "example-plan"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = data.azurerm_resource_group.GitHub.name
+  location            = data.azurerm_resource_group.GitHub.location
   os_type             = "Linux"
   sku_name            = "P1v2"
 }
 
 resource "azurerm_linux_web_app" "example" {
   name                = "example-linux-web-app"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_service_plan.example.location
-  service_plan_id     = azurerm_service_plan.example.id
+  resource_group_name = data.azurerm_resource_group.GitHub.name
+  location            = data.azurerm_resource_group.GitHub.location
+  service_plan_id     = data.azurerm_resource_group.GitHub.id
 
   site_config {}
 }
@@ -53,14 +53,14 @@ resource "azurerm_linux_web_app_slot" "example" {
 
 resource "azurerm_static_site" "web" {
   name                = "Web"
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.GitHub.location
+  resource_group_name = data.azurerm_resource_group.GitHub.name
 }
 
 resource "azurerm_static_site" "container" {
   name                = "Web"
-  location            = data.azurerm_resource_group.rg.location
-  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.GitHub.location
+  resource_group_name = data.azurerm_resource_group.GitHub.name
 }
 
 output "name" {
