@@ -16,7 +16,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "austenstone-rg" {
   name     = "myTFResourceGroup"
-  location = "eastus"
+  location = "eastus2"
 }
 
 resource "azurerm_static_site" "web" {
