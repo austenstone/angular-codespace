@@ -37,7 +37,7 @@ resource "azurerm_linux_web_app" "example" {
   name                = "example-linux-web-app"
   resource_group_name = data.azurerm_resource_group.GitHub.name
   location            = data.azurerm_resource_group.GitHub.location
-  service_plan_id     = azurerm_service_plan.GitHub.id
+  service_plan_id     = azurerm_service_plan.example.id
 
   site_config {}
 }
