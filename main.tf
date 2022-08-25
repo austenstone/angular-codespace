@@ -14,13 +14,21 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "austenstone-rg" {
+resource "azurerm_resource_group" "angular-codespace" {
   name     = "myTFResourceGroup"
-  location = "eastus"
+  location = "eastus2"
 }
 
 resource "azurerm_static_site" "web" {
   name                = "angular-web"
-  location            = azurerm_resource_group.test.location
-  resource_group_name = azurerm_resource_group.test.name
+  location            = azurerm_resource_group.angular-codespace.location
+  resource_group_name = azurerm_resource_group.angular-codespace.name
+}
+
+output "name" {
+    value = azurerm_static_site.web.name
+}
+
+output "url" {
+    value = azurerm_static_site.web.default_host_name
 }
