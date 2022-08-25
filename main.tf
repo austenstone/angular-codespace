@@ -20,15 +20,14 @@ provider "azurerm" {
   features {}
 }
 
-data "azurerm_resource_group" "angular-codespace" {
-  name     = "GitHub"
-  location = "eastus2"
+data "azurerm_resource_group" "rg" {
+  name = "GitHub"
 }
 
 resource "azurerm_static_site" "web" {
-  name                = "angular-web"
-  location            = azurerm_resource_group.angular-codespace.location
-  resource_group_name = azurerm_resource_group.angular-codespace.name
+  name                = "Web"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
 }
 
 output "name" {
