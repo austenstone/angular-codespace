@@ -35,6 +35,7 @@ data "azurerm_resource_group" "GitHub" {
 }
 
 // Web App
+
 resource "azurerm_service_plan" "example" {
   name                = "example-plan"
   resource_group_name = data.azurerm_resource_group.GitHub.name
@@ -53,7 +54,7 @@ resource "azurerm_linux_web_app" "example" {
 }
 
 resource "azurerm_linux_web_app_slot" "example" {
-  name           = "example-slot"
+  name           = format("%s-slot", var.web_app_name)
   app_service_id = azurerm_linux_web_app.example.id
 
   site_config {}
