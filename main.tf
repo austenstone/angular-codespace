@@ -1,3 +1,13 @@
+variable "static_web_app_name" {
+  type        = string
+  description = "The name of the static web app resource."
+}
+
+variable "web_app_name" {
+  type        = string
+  description = "The name of the web app resource."
+}
+
 # Configure the Azure provider
 terraform {
   backend "azurerm" {
@@ -34,7 +44,7 @@ resource "azurerm_service_plan" "example" {
 }
 
 resource "azurerm_linux_web_app" "example" {
-  name                = "example-linux-web-app"
+  name                = var.web_app_name
   resource_group_name = data.azurerm_resource_group.GitHub.name
   location            = data.azurerm_resource_group.GitHub.location
   service_plan_id     = azurerm_service_plan.example.id
@@ -52,13 +62,7 @@ resource "azurerm_linux_web_app_slot" "example" {
 // Static Site
 
 resource "azurerm_static_site" "web" {
-  name                = "Web"
-  location            = data.azurerm_resource_group.GitHub.location
-  resource_group_name = data.azurerm_resource_group.GitHub.name
-}
-
-resource "azurerm_static_site" "container" {
-  name                = "Web"
+  name                = var.static_web_app_name
   location            = data.azurerm_resource_group.GitHub.location
   resource_group_name = data.azurerm_resource_group.GitHub.name
 }
