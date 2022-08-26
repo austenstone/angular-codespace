@@ -5,7 +5,7 @@ on:
     tags: ['*']
   pull_request:
     branches: [main]
-  workflow_dispatch:
+    tags: ['*']
 
 jobs:
   build-test-deploy-release:
