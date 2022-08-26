@@ -75,10 +75,6 @@ output "api_key" {
   value = azurerm_static_site.web.api_key
 }
 
-output "api_key" {
-  value = azurerm_static_site.web.api_key
-}
-
 output "app_name" {
   value = azurerm_linux_web_app.name
 }
