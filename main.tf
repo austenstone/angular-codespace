@@ -32,7 +32,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "GitHub" {
   location = "eastus2"
-  name = format("GitHub-%s", var.web_app_name)
+  name     = format("GitHub-%s", var.web_app_name)
 }
 
 // Web App
