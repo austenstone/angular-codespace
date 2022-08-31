@@ -14,7 +14,7 @@ terraform {
     resource_group_name  = "GitHub"
     storage_account_name = "austengithubstorage"
     container_name       = "tfstate"
-    key                  = "prod.terraform.tfstate"
+    key                  = "prod.terraform.tfstate2"
   }
   required_providers {
     azurerm = {
@@ -30,24 +30,25 @@ provider "azurerm" {
   features {}
 }
 
-data "azurerm_resource_group" "GitHub" {
-  name = "GitHub"
+resource "azurerm_resource_group" "GitHub" {
+  location = "eastus2"
+  name = format("GitHub-%s", var.web_app_name)
 }
 
 // Web App
 
 resource "azurerm_service_plan" "example" {
   name                = "example-plan"
-  resource_group_name = data.azurerm_resource_group.GitHub.name
-  location            = data.azurerm_resource_group.GitHub.location
+  resource_group_name = azurerm_resource_group.GitHub.name
+  location            = azurerm_resource_group.GitHub.location
   os_type             = "Linux"
   sku_name            = "P1v2"
 }
 
 resource "azurerm_linux_web_app" "example" {
   name                = var.web_app_name
-  resource_group_name = data.azurerm_resource_group.GitHub.name
-  location            = data.azurerm_resource_group.GitHub.location
+  resource_group_name = azurerm_resource_group.GitHub.name
+  location            = azurerm_resource_group.GitHub.location
   service_plan_id     = azurerm_service_plan.example.id
 
   site_config {}
@@ -64,8 +65,8 @@ resource "azurerm_linux_web_app_slot" "example" {
 
 resource "azurerm_static_site" "web" {
   name                = var.static_web_app_name
-  location            = data.azurerm_resource_group.GitHub.location
-  resource_group_name = data.azurerm_resource_group.GitHub.name
+  location            = azurerm_resource_group.GitHub.location
+  resource_group_name = azurerm_resource_group.GitHub.name
 }
 
 output "name" {
