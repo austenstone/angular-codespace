@@ -1,0 +1,30 @@
+name: Azure Static Site Deploy
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        default: 'dist'
+        required: false
+        type: string
+      api_key:
+        required: true
+        type: string
+
+jobs:
+  azure-web-static:
+    runs-on: ubuntu-latest
+    environment:
+      name: Azure Static Web App
+      url: ${{ steps.azure-deploy.outputs.static_web_app_url }}
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+      - uses: Azure/static-web-apps-deploy@v1
+        id: azure-deploy
+        with:
+          azure_static_web_apps_api_token: ${{ inputs.api_key }}
+          action: upload
+          app_location: .
+          skip_app_build: true

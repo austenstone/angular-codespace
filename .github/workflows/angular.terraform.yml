@@ -1,0 +1,105 @@
+name: "Terraform"
+
+on:
+  workflow_call:
+    outputs:
+      url:
+        description: "The url of the resource"
+        value: ${{ jobs.terraform.outputs.url }}
+      name:
+        description: "The name of the resource"
+        value: ${{ jobs.terraform.outputs.name }}
+      api_key:
+        description: "The api_key of the resource"
+        value: ${{ jobs.terraform.outputs.api_key }}
+      app_name:
+        description: "The name of the app"
+        value: ${{ jobs.terraform.outputs.app_name }}
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      TF_VAR_static_web_app_name: ${{ github.event.repository.name }}-static
+      TF_VAR_web_app_name: ${{ github.event.repository.name }}
+    outputs:
+      url: ${{ steps.terraform-outputs.outputs.url }}
+      name: ${{ steps.terraform-outputs.outputs.name }}
+      api_key: ${{ steps.terraform-outputs.outputs.api_key }}
+      app_name: ${{ steps.terraform-outputs.outputs.app_name }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+
+      - name: Terraform Outputs
+        id: terraform-outputs
+        run: |
+          echo "{url}={$(terraform output -raw url)}" >> $GITHUB_OUTPUT
+          echo "{name}={$(terraform output -raw name)}" >> $GITHUB_OUTPUT
+          echo "{api_key}={$(terraform output -raw api_key)}" >> $GITHUB_OUTPUT
+          echo "{app_name}={$(terraform output -raw app_name)}" >> $GITHUB_OUTPUT

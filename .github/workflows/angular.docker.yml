@@ -1,0 +1,80 @@
+name: Docker Deploy
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        default: "dist"
+        required: false
+        type: string
+      dockerhub-username:
+        default: ${{ github.event.repository.owner.login }}
+        required: false
+        type: string
+    outputs:
+      tags:
+        description: "The first output string"
+        value: ${{ jobs.docker.outputs.tags }}
+      labels:
+        description: "The first output string"
+        value: ${{ jobs.docker.outputs.labels }}
+
+env:
+  DOCKERHUB_USERNAME: miltonlaxer
+
+jobs:
+
+  docker:
+    environment:
+      name: DockerHub
+      url: https://hub.docker.com/r/${{ inputs.dockerhub-username }}/${{ github.event.repository.name }}
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
+    steps:
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          username: ${{ inputs.dockerhub-username }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: dist/${{ github.event.repository.name }}
+      - uses: austenstone/.github/.github/actions/docker-build-push@main
+        id: meta
+        with:
+          images: ${{ inputs.dockerhub-username }}/${{ github.event.repository.name }}
+
+  docker-ghcr:
+    environment:
+      name: GitHub Container Registry
+      url: https://github.com/${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}/pkgs/container/${{ github.event.repository.name }}
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
+    steps:
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: dist/${{ github.event.repository.name }}
+      - uses: austenstone/.github/.github/actions/docker-build-push@main
+        id: meta
+  # trivy:
+  #   needs: [docker]
+  #   uses: ./.github/workflows/trivy.yml
+  #   with:
+  #     image-ref: ${{ needs.docker.outputs.tags }}
+  #   secrets: inherit

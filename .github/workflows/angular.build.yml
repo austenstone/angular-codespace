@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      out_dir:
+        default: 'dist'
+        required: true
+        type: string
+      runs-on:
+        default: 'ubuntu-latest'
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ${{ inputs.runs-on }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+      - uses: austenstone/.github/.github/actions/npm-ci-cache@main
+      - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: ${{ inputs.out_dir }}
+
+

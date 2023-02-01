@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        default: 'dist'
+        required: false
+        type: string
+
+jobs:
+  release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: ${{ inputs.artifact-name }}
+    - uses: softprops/action-gh-release@v1
+      with:
+        files: .
+
