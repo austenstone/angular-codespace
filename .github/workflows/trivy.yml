@@ -1,0 +1,38 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Trivy
+on:
+  workflow_call:
+    inputs:
+      image-ref: # truncated to a single line
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  trivy:
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+    steps:
+      - id: truncate
+        run: echo "::set-output name=image-ref::$(echo "${{ inputs.image-ref }}" | head -1)"
+      - name: Run Trivy vulnerability scanner for image ${{ inputs.image-ref }}
+        uses: aquasecurity/trivy-action@d63413b0a4a4482237085319f7f4a1ce99a8f2ac
+        with:
+          image-ref: ${{ steps.truncate.outputs.image-ref }}
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'

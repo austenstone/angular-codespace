@@ -6,10 +6,9 @@ on:
     tags: ['*']
   pull_request:
     branches: [main]
-    tags: ['*']
 
 jobs:
   build-test-deploy-release:
     name: CI/CD
-    uses: ./.github/workflows/angular.yml@main
+    uses: ./.github/workflows/angular.yml
     secrets: inherit
