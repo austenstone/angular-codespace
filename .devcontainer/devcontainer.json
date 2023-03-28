@@ -8,30 +8,34 @@
 	},
 	"forwardPorts": [ 4200, 9876 ],
 	"postCreateCommand": "npm i",
-	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"bash": {
-				"path": "bash",
-				"icon": "terminal-bash"
-			}
+    "customizations": {
+      "vscode": {
+		"settings": {
+			"terminal.integrated.profiles.linux": {
+				"bash": {
+					"path": "bash",
+					"icon": "terminal-bash"
+				}
+			},
+			"terminal.integrated.defaultProfile.linux": "bash",
+			"extensions.ignoreRecommendations": true,
+			"gitlens.showWelcomeOnInstall": false,
+			"gitlens.showWhatsNewAfterUpgrades": false,
 		},
-		"terminal.integrated.defaultProfile.linux": "bash",
-		"extensions.ignoreRecommendations": true,
-		"gitlens.showWelcomeOnInstall": false,
-		"gitlens.showWhatsNewAfterUpgrades": false,
-	},
-	"extensions": [
-		"eamodio.gitlens",
-		"ms-vsliveshare.vsliveshare",
-		"visualstudioexptteam.vscodeintellicode",
-		"github.vscode-pull-request-github",
-		"angular.ng-template",
-		"johnpapa.angular2",
-		"eg2.vscode-npm-script",
-		"dbaeumer.vscode-eslint",
-		"cyrilletuzi.angular-schematics",
-		"alexiv.vscode-angular2-files",
-		"sibiraj-s.vscode-scss-formatter",
-		"redhat.vscode-yaml"
-	]
+		"extensions": [
+			"eamodio.gitlens",
+			"ms-vsliveshare.vsliveshare",
+			"visualstudioexptteam.vscodeintellicode",
+			"github.vscode-pull-request-github",
+			"angular.ng-template",
+			"johnpapa.angular2",
+			"eg2.vscode-npm-script",
+			"dbaeumer.vscode-eslint",
+			"cyrilletuzi.angular-schematics",
+			"alexiv.vscode-angular2-files",
+			"sibiraj-s.vscode-scss-formatter",
+			"redhat.vscode-yaml"
+		]
+      }
+    }
 }
