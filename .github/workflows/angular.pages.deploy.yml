@@ -10,6 +10,7 @@ on:
 
 jobs:
   pages:
+    timeout-minutes: 2
     concurrency:
       group: "pages"
       cancel-in-progress: true
