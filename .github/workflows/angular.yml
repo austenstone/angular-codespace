@@ -41,7 +41,7 @@ jobs:
   terraform:
     name: 🟣
     # skip until we get Azure working
-    if: 0
+    # if: 0
     needs: [docker, test, lint]
     uses: ./.github/workflows/angular.terraform.yml
     secrets: inherit
