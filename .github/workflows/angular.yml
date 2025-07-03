@@ -53,6 +53,9 @@ jobs:
     name: ☁️
     if: needs.terraform.outputs.api_key && github.ref == 'refs/heads/main'
     needs: [terraform]
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/angular.azure.web.static.deploy.yml
     with:
       api_key: ${{ needs.terraform.outputs.api_key }}
