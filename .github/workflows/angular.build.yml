@@ -12,6 +12,10 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   build:
     runs-on: ${{ inputs.runs-on }}
