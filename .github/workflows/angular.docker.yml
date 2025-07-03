@@ -1,5 +1,10 @@
 name: Docker Deploy
 
+permissions:
+  contents: read
+  packages: write
+  actions: write
+
 on:
   workflow_call:
     inputs:
@@ -25,6 +30,9 @@ env:
 jobs:
 
   docker:
+    permissions:
+      contents: read
+      packages: write
     environment:
       name: DockerHub
       url: https://hub.docker.com/r/${{ inputs.dockerhub-username }}/${{ github.event.repository.name }}
@@ -50,6 +58,9 @@ jobs:
           images: ${{ inputs.dockerhub-username }}/${{ github.event.repository.name }}
 
   docker-ghcr:
+    permissions:
+      contents: read
+      packages: write
     environment:
       name: GitHub Container Registry
       url: https://github.com/${{ github.event.repository.owner.login }}/${{ github.event.repository.name }}/pkgs/container/${{ github.event.repository.name }}

@@ -3,6 +3,9 @@ name: Angular
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: ⚒️
@@ -29,12 +32,17 @@ jobs:
     name: 🚀
     if: github.ref == 'refs/heads/main'
     needs: [build, test, lint]
+    permissions:
+      contents: read
+      pages: write
     uses: ./.github/workflows/angular.pages.deploy.yml
 
   docker:
     name: 🐳
     if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main'
     needs: [build]
+    permissions:
+      contents: read
     uses: ./.github/workflows/angular.docker.yml
     secrets: inherit
 
@@ -43,6 +51,8 @@ jobs:
     # skip until we get Azure working
     # if: 0
     needs: [docker, test, lint]
+    permissions:
+      contents: read
     uses: ./.github/workflows/angular.terraform.yml
     secrets: inherit
 
@@ -50,6 +60,9 @@ jobs:
     name: ☁️
     if: needs.terraform.outputs.api_key && github.ref == 'refs/heads/main'
     needs: [terraform]
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/angular.azure.web.static.deploy.yml
     with:
       api_key: ${{ needs.terraform.outputs.api_key }}
@@ -69,4 +82,6 @@ jobs:
     name: 🚢
     if: startsWith(github.ref, 'refs/tags/')
     needs: [build, test, lint]
+    permissions:
+      contents: write
     uses: ./.github/workflows/angular.release.yml
