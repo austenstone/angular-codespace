@@ -1,5 +1,10 @@
 name: Docker Deploy
 
+permissions:
+  contents: read
+  packages: write
+  actions: write
+
 on:
   workflow_call:
     inputs:
