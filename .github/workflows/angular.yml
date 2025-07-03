@@ -32,6 +32,9 @@ jobs:
     name: 🚀
     if: github.ref == 'refs/heads/main'
     needs: [build, test, lint]
+    permissions:
+      contents: read
+      pages: write
     uses: ./.github/workflows/angular.pages.deploy.yml
 
   docker:
