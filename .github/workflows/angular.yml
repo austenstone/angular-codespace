@@ -43,6 +43,8 @@ jobs:
     # skip until we get Azure working
     # if: 0
     needs: [docker, test, lint]
+    permissions:
+      contents: read
     uses: ./.github/workflows/angular.terraform.yml
     secrets: inherit
 
