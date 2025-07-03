@@ -1,9 +1,10 @@
 name: Angular
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
-
-jobs:
   build:
     name: ⚒️
     uses: ./.github/workflows/angular.build.yml
@@ -48,6 +49,9 @@ jobs:
 
   azure-deploy:
     name: ☁️
+    permissions:
+      contents: read
+      deployments: write
     if: needs.terraform.outputs.api_key && github.ref == 'refs/heads/main'
     needs: [terraform]
     uses: ./.github/workflows/angular.azure.web.static.deploy.yml
@@ -57,13 +61,14 @@ jobs:
 
   azure-deploy-docker:
     name: ☁️🐳
+    permissions:
+      contents: read
+      deployments: write
     if: 0 && needs.terraform.outputs.api_key && github.ref == 'refs/heads/main'
     needs: [terraform]
     uses: ./.github/workflows/angular.azure.web.app.deploy.yml
     with:
-      app-name: ${{ needs.terraform.outputs.app_name }}
-      images: ${{ needs.docker.outputs.tags }}
-    secrets: inherit
+      app-name: $
 
   release:
     name: 🚢
