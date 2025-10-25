@@ -5,6 +5,7 @@ jobs:
   ci-failure:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
       - uses: austenstone/copilot-cli-actions@main
         with:
           github-token: ${{ secrets.PAT }}
