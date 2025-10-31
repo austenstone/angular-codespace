@@ -24,7 +24,7 @@ jobs:
       - id: truncate
         run: echo "::set-output name=image-ref::$(echo "${{ inputs.image-ref }}" | head -1)"
       - name: Run Trivy vulnerability scanner for image ${{ inputs.image-ref }}
-        uses: aquasecurity/trivy-action@d63413b0a4a4482237085319f7f4a1ce99a8f2ac
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8
         with:
           image-ref: ${{ steps.truncate.outputs.image-ref }}
           format: 'template'
