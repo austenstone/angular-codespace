@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
       - uses: austenstone/.github/.github/actions/npm-ci-cache@main
       - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: dist
           path: ${{ inputs.out_dir }}
