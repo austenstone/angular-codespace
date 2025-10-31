@@ -47,7 +47,7 @@ jobs:
         with:
           username: ${{ inputs.dockerhub-username }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}
@@ -76,7 +76,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}

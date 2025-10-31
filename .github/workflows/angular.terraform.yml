@@ -37,7 +37,7 @@ jobs:
       app_name: ${{ steps.terraform-outputs.outputs.app_name }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
